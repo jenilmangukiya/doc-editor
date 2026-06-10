@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc; /* light slate background */
+  --foreground: #0f172a; /* dark slate text */
 }
 
 @theme inline {
@@ -12,15 +12,135 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
 }
+
+/* Global Interactive Cursor Overrides */
+button,
+select,
+input[type="submit"],
+input[type="button"],
+input[type="checkbox"],
+input[type="radio"],
+label,
+a,
+[role="button"] {
+  cursor: pointer !important;
+}
+
+button:disabled,
+select:disabled,
+input:disabled,
+[disabled] {
+  cursor: not-allowed !important;
+}
+
+/* TipTap Editor Styles */
+.ProseMirror {
+  outline: none;
+}
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #0f172a;
+}
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+.ProseMirror h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #334155;
+}
+.ProseMirror p {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+  color: #334155;
+}
+.ProseMirror ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.ProseMirror ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.ProseMirror li {
+  margin-bottom: 0.25rem;
+}
+.ProseMirror strong {
+  font-weight: 700;
+}
+.ProseMirror em {
+  font-style: italic;
+}
+.ProseMirror u {
+  text-decoration: underline;
+}
+
+/* Print Overrides for Clean PDF Export */
+@media print {
+  header,
+  nav,
+  button,
+  select,
+  a,
+  .border-b, /* Editor Sub-Header */
+  .fixed, /* Modals */
+  .flex-wrap /* Editor Toolbar */ {
+    display: none !important;
+  }
+
+  @page {
+    size: auto;
+    margin: 0mm; /* Removes default browser header (title/date) and footer (URL) */
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 20mm 20mm !important; /* Standard document page padding */
+    margin: 0 !important;
+  }
+
+  main,
+  .bg-slate-50 {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mx-auto.max-w-4xl {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    max-width: 800px !important; /* Caps text width to look like centered page content */
+    width: 100% !important;
+  }
+
+  .prose {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+
