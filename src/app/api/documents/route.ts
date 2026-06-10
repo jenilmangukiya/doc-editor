@@ -48,7 +48,7 @@ export async function GET(request: Request) {
     // Format results to make it clear if owner or shared
     const formatted = userDocs.map((doc) => ({
       ...doc,
-      role: doc.ownerId === activeUser.id ? "owner" : doc.accessLevel || "viewer",
+      role: doc.ownerId === activeUser.id ? "owner" : (doc.accessLevel ? doc.accessLevel.toLowerCase() : "viewer"),
     }));
 
     return NextResponse.json(formatted);
